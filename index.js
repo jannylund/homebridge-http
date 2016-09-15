@@ -162,6 +162,10 @@ var pollingtoevent = require('polling-to-event');
 		this.log('HTTP get power function failed: %s', error.message);
 		callback(error);
 	} else {
+		// Support Json return value from ESP Easy http://www.esp8266.nu/ 
+		if(responseBody instanceof Object && responseBody.state != undefined) {
+			responseBody = responseBody.state;
+		}
 		var binaryState = parseInt(responseBody);
 		var powerOn = binaryState > 0;
 		this.log("Power state is currently %s", binaryState);

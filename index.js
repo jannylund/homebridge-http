@@ -164,7 +164,7 @@ var pollingtoevent = require('polling-to-event');
 	} else {
 		// Support Json return value from ESP Easy http://www.esp8266.nu/ 
 		if(isNaN(parseInt(responseBody))) {
-			responseBody = eval("(" + responseBody + ")");
+			responseBody = JSON.parse(responseBody);
 			responseBody = responseBody.state;
 		}
 		var binaryState = parseInt(responseBody);
